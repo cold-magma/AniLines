@@ -2,12 +2,22 @@ import React from "react";
 import { useEffect, useState, useRef } from "react";
 import { Row } from "../Row/Row";
 
-const AniLines = () => {
+export interface AniLineProps {
+    rowCount: number;
+    columnCount: number;
+}
+
+const AniLines = (props: AniLineProps) => {
     const [mouseInside, setMouseInside] = useState(false);
     let angle: number = 0;
-    let x: number;
+    let x: any;
 
     const [color, setColor] = useState({ r: 255, g: 255, b: 255 });
+
+    const rows = [];
+    for(let i=0;i<props.rowCount;i++){
+        rows.push(<Row columnCount={props.rowCount}/>)
+    }
 
     useEffect(() => {
         animateLines();
@@ -93,22 +103,7 @@ const AniLines = () => {
             onMouseLeave={mouseLeft}
             className="App"
             id="maindiv"
-        >
-            <Row />
-            <Row />
-            <Row />
-            <Row />
-            <Row />
-            <Row />
-            <Row />
-            <Row />
-            <Row />
-            <Row />
-            <Row />
-            <Row />
-            <Row />
-            <Row />
-        </div>
+        >{rows}</div>
     );
 }
 

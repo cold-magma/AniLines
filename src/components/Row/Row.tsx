@@ -1,24 +1,19 @@
 import React from "react";
 
-export const Row = () => {
+export interface RowProps {
+    columnCount: number;
+}
+
+export const Row = (props : RowProps) => {
+    var items:Array<any> = [];
+
+    for(let i=0;i<props.columnCount;i++){
+        items.push(<span className="line"></span>);
+    }
+
     return (
         <div className="row">
-            <span className="line"></span>
-            <span className="line"></span>
-            <span className="line"></span>
-            <span className="line"></span>
-            <span className="line"></span>
-            <span className="line"></span>
-            <span className="line"></span>
-            <span className="line"></span>
-            <span className="line"></span>
-            <span className="line"></span>
-            <span className="line"></span>
-            <span className="line"></span>
-            <span className="line"></span>
-            <span className="line"></span>
-            <span className="line"></span>
-            <span className="line"></span>
+           {items}
         </div>
     );
 }
