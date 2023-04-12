@@ -4,16 +4,16 @@ export interface RowProps {
     columnCount: number;
 }
 
-export const Row = (props : RowProps) => {
-    var items:Array<any> = [];
+export const Row = (props: RowProps) => {
+    var items: Array<any> = [];
 
-    for(let i=0;i<props.columnCount;i++){
-        items.push(<span className="line"></span>);
+    for (let i = 0; i < props.columnCount; i++) {
+        items.push(<span key={i} className="line"></span>);
     }
 
     return (
         <div className="row">
-           {items}
+            {items}
         </div>
     );
 }

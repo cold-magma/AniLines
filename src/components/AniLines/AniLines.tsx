@@ -5,29 +5,41 @@ import { Row } from "../Row/Row";
 export interface AniLineProps {
     rowCount: number;
     columnCount: number;
+    enableIdleAnimation: boolean;
 }
 
 const AniLines = (props: AniLineProps) => {
     const [mouseInside, setMouseInside] = useState(false);
-    let angle: number = 0;
     let x: any;
+    let angle: number = 0;
 
     const [color, setColor] = useState({ r: 255, g: 255, b: 255 });
 
     const rows = [];
-    for(let i=0;i<props.rowCount;i++){
-        rows.push(<Row columnCount={props.rowCount}/>)
+    for (let i = 0; i < props.rowCount; i++) {
+        rows.push(<Row key={i} columnCount={props.rowCount} />)
     }
 
     useEffect(() => {
-        animateLines();
+        console.log(x);
+    }, [x])
+
+
+    useEffect(() => {
+        if(!mouseInside)
+            animateLines();
     }, [mouseInside]);
 
-    const mouseFollow = (e:any) => {
-        if (x != null || x != undefined) {
-            clearInterval(x);
+    const clearAllIntervals = () => {
+        const max_interval_id = window.setInterval(function () { }, Number.MAX_SAFE_INTEGER);
+        for (let i = 1; i <= max_interval_id; i++) {
+            window.clearInterval(i);
         }
+    }
+
+    const mouseFollow = (e: any) => {
         setMouseInside(true);
+        clearAllIntervals();
         var lines = document.getElementsByClassName("line");
         for (var i = 0; i < lines.length; i++) {
             var line = lines[i] as HTMLSpanElement;
@@ -58,16 +70,16 @@ const AniLines = (props: AniLineProps) => {
 
     const mouseLeft = () => {
         setMouseInside(false);
+        animateLines();
     };
 
     const animateLines = () => {
-        x = setInterval(() => theActualAnimation(), 100);
+        if (props.enableIdleAnimation && typeof (x) === 'undefined') {
+            x = setInterval(() => theActualAnimation(), 100);
+        }
     };
 
     const theActualAnimation = () => {
-        if (mouseInside) {
-            return;
-        }
         var lines = document.getElementsByClassName("line");
         var degrees: number = angle;
         for (var i = 0; i < lines.length; i++) {
@@ -101,7 +113,7 @@ const AniLines = (props: AniLineProps) => {
         <div
             onMouseMove={mouseFollow}
             onMouseLeave={mouseLeft}
-            className="App"
+            className="anilines-main"
             id="maindiv"
         >{rows}</div>
     );
