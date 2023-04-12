@@ -6,6 +6,7 @@ export interface AniLineProps {
     rowCount: number;
     columnCount: number;
     enableIdleAnimation: boolean;
+    style: React.CSSProperties;
 }
 
 const AniLines = (props: AniLineProps) => {
@@ -13,23 +14,20 @@ const AniLines = (props: AniLineProps) => {
     let x: any;
     let angle: number = 0;
 
-    const [color, setColor] = useState({ r: 255, g: 255, b: 255 });
-
+    // Row objects list
     const rows = [];
     for (let i = 0; i < props.rowCount; i++) {
-        rows.push(<Row key={i} columnCount={props.rowCount} />)
+        rows.push(<Row key={i} columnCount={props.rowCount} style={props.style} />)
     }
 
-    useEffect(() => {
-        console.log(x);
-    }, [x])
-
-
+    // initiate the idle animation if enabled on start and on mouse position change if
+    // the mouse is on the maindiv object
     useEffect(() => {
         if(!mouseInside)
             animateLines();
     }, [mouseInside]);
 
+    // clear all set intervals from DOM when mouse leaves the maindiv
     const clearAllIntervals = () => {
         const max_interval_id = window.setInterval(function () { }, Number.MAX_SAFE_INTEGER);
         for (let i = 1; i <= max_interval_id; i++) {
@@ -37,6 +35,7 @@ const AniLines = (props: AniLineProps) => {
         }
     }
 
+    // logic to move the elements to point to the cursor
     const mouseFollow = (e: any) => {
         setMouseInside(true);
         clearAllIntervals();
@@ -68,17 +67,20 @@ const AniLines = (props: AniLineProps) => {
         }
     };
 
+    // to resume the idel animation when the mouse leaves the maindiv object
     const mouseLeft = () => {
         setMouseInside(false);
         animateLines();
     };
 
+    // set interval loop for the idle animation
     const animateLines = () => {
         if (props.enableIdleAnimation && typeof (x) === 'undefined') {
             x = setInterval(() => theActualAnimation(), 100);
         }
     };
 
+    // logic to perform idle animation
     const theActualAnimation = () => {
         var lines = document.getElementsByClassName("line");
         var degrees: number = angle;
