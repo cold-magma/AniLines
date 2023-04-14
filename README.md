@@ -1,5 +1,5 @@
 # **AniLines**
-A react library that gives the user to get a simple interactive matrix of lines which can be cumtomized as per your needs.
+A react library that gives the user to get a simple interactive matrix of lines which can be cumtomized as per your needs. The lines will move according to the mouse position and will otherwise have an idle animation when the mouse is not hovering over them. 
 
 ## **Getting started**
 
@@ -13,7 +13,7 @@ Once installed, you're ready to go.
 
 ## **Cutomizations**
 
-Presently, Anilines supports a suite of basic customizations, with a load more in the pipeline (hopefully i have the time). 
+Presently, Anilines supports a suite of basic customizations, with a load more in the pipeline (hopefully i have the time 🥲). 
 
 | Property    | Default value | Required |  Description |
 | ------------| ------------- |----------|--------------|
