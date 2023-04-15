@@ -41,7 +41,8 @@ function App() {
 export default App;
 ```
 And the above example looks like this -
-<center>![Alt Text](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWFiZDI3OGNmNDIwMjU2OGRkNjJhNTFkZDhiNmI0Y2Q1NDU4MmZiOCZjdD1n/NL9zTKzpSWhq11Eblw/giphy.gif)</center>
+
+<img src=https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWFiZDI3OGNmNDIwMjU2OGRkNjJhNTFkZDhiNmI0Y2Q1NDU4MmZiOCZjdD1n/NL9zTKzpSWhq11Eblw/giphy.gif >
 
 ## Suggestion and improvements
 
